@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse
 from .models import Question, Choice
 from django.views import generic
+from django.utils import timezone
 
 
 #esta es una function based view
@@ -20,7 +21,7 @@ class IndexView(generic.ListView):
     def get_queryset(self):
         """Return the last five published questions"""
         #ordenadas desde la mas reciente hasta la mas antigua
-        return Question.objects.order_by("-pub_date")[:5] 
+        return Question.objects.filter(pub_date__lte = timezone.now()).order_by("-pub_date")[:5] 
 
 #esta es una function based view
 # def detail(request, question_id):
