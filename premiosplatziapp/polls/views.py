@@ -19,9 +19,10 @@ class IndexView(generic.ListView):
     context_object_name = "latest_question_list"
 
     def get_queryset(self):
-        """Return the last five published questions"""
+        """Return the last five not empty published questions"""
         #ordenadas desde la mas reciente hasta la mas antigua
-        return Question.objects.filter(pub_date__lte = timezone.now()).order_by("-pub_date")[:5] 
+
+        return Question.objects.exclude(choice__isnull=True).filter(pub_date__lte = timezone.now()).order_by("-pub_date")[:5] 
 
 #esta es una function based view
 # def detail(request, question_id):
@@ -35,6 +36,10 @@ class DetailView(generic.DetailView):
     model = Question
     template_name = 'polls/detail.html'
 
+    def get_queryset(self):
+        """Excludes any that aren't published yet and the empty questions"""
+        return Question.objects.exclude(choice__isnull=True).filter(pub_date__lte = timezone.now())
+
 #esta es una function based view
 # def results(request, question_id):
 #     q = get_object_or_404(Question, pk=question_id)
@@ -47,9 +52,13 @@ class ResultView(generic.DetailView):
     model = Question
     template_name = 'polls/results.html'
 
+    def get_queryset(self):
+        """Excludes any that aren't published yet and the empty questions"""
+        return Question.objects.exclude(choice__isnull=True).filter(pub_date__lte = timezone.now())
+
 
 def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
+    question = get_object_or_404(Question.objects.exclude(choice__isnull=True), pk=question_id)
     try:
         selected_choice = question.choice_set.get(pk=request.POST["choice"])
     except (KeyError, Choice.DoesNotExist):
