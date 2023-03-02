@@ -1,8 +1,134 @@
-li a {
-    color: green;
-    text-decoration: none;
+body {
+    font-family: 'Quicksand', sans-serif;
 }
 
-/* body {
-    background: white url("./images/background.gif") no-repeat;
-} */
+.main-container {
+    display: grid;
+    place-items: center;
+    grid-template-rows: auto auto auto;
+    width: 100%;
+    height: 100vh;
+    background-color: #f6fff4;
+}
+.main-container form{
+    width: 100%;
+}
+
+.main-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 80px 50px 50px;
+    height: 60px;
+    font-size: 60px;
+}
+
+.questions-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    border-radius: 24px;
+    padding: 32px;
+    width: 500px;
+}
+
+.question-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.question-list li {
+    padding: 16px;
+    font-size: 28px;
+}
+
+.question-list li a {
+    text-decoration: none;
+    color: #C7C7C7;
+}
+
+.question-list li a:hover {
+    color: #293427;
+}
+
+.choice-list {
+    padding: 20px 20px 40px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.choice-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.choice-content input[type="radio"] {
+    display: flex;
+    align-items: center;
+}
+
+.choice-content label {
+    display: flex;
+    align-items: center;
+    margin-left: 12px;
+    font-size: 20px;
+    color: #C7C7C7;
+}
+
+.primary-button {
+    background-color: #ACD9B2;
+    border-radius: 8px;
+    border: none;
+    color: white;
+    width: 100%;
+    cursor: pointer;
+    font-weight: bold;
+    height: 52px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.primary-button:hover {
+    background-color: #79d685;;
+}
+
+.main-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.main-footer a {
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+.votes-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.choice-list li {
+    color: #C7C7C7;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-between;
+    padding: 4px 8px 4px 8px;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #C7C7C7;
+    border-radius: 0 0 12px 12px;
+}
+
+.choice-list li:last-child {
+    margin-bottom: 0;
+}

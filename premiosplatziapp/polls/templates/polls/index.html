@@ -1,12 +1,37 @@
-{% load static %}
-<link rel="stylesheet" href="{% static 'polls/style.css' %}">
-
-{% if latest_question_list %}
-    <ul>
-    {% for question in latest_question_list %}
-        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No polls are available.</p>
-{% endif %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <title>Home</title>
+</head>
+<body>
+    <div class="main-container">
+        <header class = "main-header">
+            <h1>Premios Platzi App</h1>
+        </header>
+        <main class="questions-container">
+            {% if latest_question_list %}
+                <ul class="question-list">
+                {% for question in latest_question_list %}
+                    <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+                {% endfor %}
+                </ul>
+            {% else %}
+                <p>No polls are available.</p>
+            {% endif %}
+        </main>
+        <footer class = "main-footer">
+            <a href="https://platzi.com">Platzi</a>
+            <a href="#">Contact</a>
+            <a href="#">About us</a>
+        </footer>
+    </div>
+</body>
+</html>

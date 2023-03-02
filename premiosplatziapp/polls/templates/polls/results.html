@@ -1,7 +1,39 @@
-<h1>{{ question.question_text }}</h1>
-<ul>
-{% for choice in question.choice_set.all %}
-    <li>{{ choice.choice_text }} -- {{ choice.votes }} voto{{ choice.votes|pluralize }}</li>
-{% endfor %}
-</ul>
-<a href="{% url 'polls:detail' question.id %}">Votar de nuevo</a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;500;700&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'polls/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'polls/style.css' %}">
+    <title>{{ question.question_text }}</title>
+</head>
+<body>
+    <div class="main-container">
+        <header class = "main-header">
+            <h1>{{ question.question_text }}</h1>
+        </header>
+        <main class="questions-container">
+            <div class="votes-container">
+                <ul class="choice-list">
+                    {% for choice in question.choice_set.all %}
+                        <li>
+                            <span>{{ choice.choice_text }} </span>
+                            <span>{{ choice.votes }} voto{{ choice.votes|pluralize }}</span>
+                        </li>
+                    {% endfor %}
+                </ul>
+                <a class="primary-button" href="{% url 'polls:detail' question.id %}">Votar de nuevo</a>
+            </div>
+        </main>
+        <footer class="main-footer">
+            <a href="{% url 'polls:index' %}">Inicio</a>
+        </footer>
+    </div>
+</body>
+</html>
+
+
