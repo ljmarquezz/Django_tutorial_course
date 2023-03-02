@@ -3,21 +3,9 @@ from django.forms.models import BaseInlineFormSet
 
 from .models import Question, Choice
 
-class RequiredChoice(BaseInlineFormSet):
-    
-    def clean(self) -> None:
-        """Check that at least one Choice has been entered"""
-        super(RequiredChoice, self).clean()
-        if any(self.errors):
-            return
-        if not any(cleaned_data and not cleaned_data.get('DELETE', False)
-            for cleaned_data in self.cleaned_data):
-            raise forms.ValidationError('At least one choice required.')
-
-class ChoiceInline(admin.TabularInline):
+class ChoiceInline(admin.StackedInline):
     model = Choice
     extra = 3
-    formset = RequiredChoice
     exclude = ["votes"]
 
 class QuestionAdmin(admin.ModelAdmin):
